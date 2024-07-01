@@ -25,7 +25,7 @@ track = MidiTrack()
 mid.tracks.append(track)
 
 # Add the chromatic scale notes to the track
-for i in range(range_notes + 1):
+for i in range(range_notes):
     note = start_midi + i
     track.append(Message('note_on', note=note, velocity=78, time=0))
     track.append(Message('note_off', note=note, velocity=78, time=note_length))
