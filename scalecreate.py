@@ -27,9 +27,9 @@ mid.tracks.append(track)
 # Add the chromatic scale notes to the track
 for i in range(range_notes + 1):
     note = start_midi + i
-    track.append(Message('note_on', note=note, velocity=64, time=0))
-    track.append(Message('note_off', note=note, velocity=64, time=note_length))
-    track.append(Message('note_off', note=note, velocity=64, time=note_gap))
+    track.append(Message('note_on', note=note, velocity=78, time=0))
+    track.append(Message('note_off', note=note, velocity=78, time=note_length))
+    track.append(Message('note_off', note=note, velocity=78, time=note_gap))
 
 # Save the MIDI file
 midi_file_name = 'chromatic_scale.mid'
