@@ -15,6 +15,7 @@ start_note = easygui.enterbox("Enter the starting note (e.g., C4, D#3):")
 range_notes = int(easygui.enterbox("Enter the range (number of semitones):"))
 note_length = int(easygui.enterbox("Enter the note length (in milliseconds):"))
 note_gap = int(easygui.enterbox("Enter the note gap (in milliseconds):"))
+num_channels = int(easygui.enterbox("Enter the number of MIDI channels:"))
 
 # Convert the starting note to MIDI number
 start_midi = note_to_midi(start_note)
@@ -25,11 +26,12 @@ track = MidiTrack()
 mid.tracks.append(track)
 
 # Add the chromatic scale notes to the track
-for i in range(range_notes):
+for i in range(range_notes + 1):
     note = start_midi + i
-    track.append(Message('note_on', note=note, velocity=78, time=0))
-    track.append(Message('note_off', note=note, velocity=78, time=note_length))
-    track.append(Message('note_off', note=note, velocity=78, time=note_gap))
+    channel = i % num_channels
+    track.append(Message('note_on', note=note, velocity=78, time=0, channel=channel))
+    track.append(Message('note_off', note=note, velocity=78, time=note_length, channel=channel))
+    track.append(Message('note_off', note=note, velocity=78, time=note_gap, channel=channel))
 
 # Save the MIDI file
 midi_file_name = 'chromatic_scale.mid'
